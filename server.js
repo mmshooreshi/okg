@@ -1,7 +1,7 @@
 var express = require('express');
 var server = express();
 
-server.get('/newuser/:name/:phone_number', require('./api/registerUser'));
+server.get('/registerUser/:name/:phone_number', require('./api/registerUser'));
+server.get('/checkIfRegistered/:phone_number', require('./api/checkIfRegistered'));
 
 server.listen(3000);
-
