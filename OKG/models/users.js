@@ -6,7 +6,7 @@ function users(connection) {
         name: sequelize.STRING,
         phone_number: sequelize.STRING(10),
     });
-return User;
+    return User;
 }
 
 module.exports = users;
