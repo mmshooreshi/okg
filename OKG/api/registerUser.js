@@ -1,39 +1,33 @@
-const sequelize=require('../mysqlclient')
-var Sequelize = require('sequelize');
+const db = require('../mysqlclient')
 
-function registerUser(req , res) {
-    var Item = sequelize.define('Item', {
-        name: Sequelize.STRING,
-        description: Sequelize.STRING,
-        qty: Sequelize.INTEGER
-    });
+function registerUser(req, res) {
 
-//Applying Item Table to database
-    sequelize.sync(function (err) {
+var User = require('../models/users')(db);
+
+//Applying User Table to database
+    db.sync(function (err) {
         if (err) {
             console.log('An error occured while creating table');
         } else {
-            console.log('Item table created successfully');
+            console.log('User table created successfully');
         }
     });
 
-
-    sequelize.sync().then(function () {
-        Item.create({
+    db.sync().then(function () {
+        User.create({
             name: req.params.name,
-            description: req.params.description,
-            qty: 50
+            phone_number: req.params.phone_number,
         }).then(function (data) {
             console.log(data.values)
         })
     });
 
     /*
-    Item.find({}).then(function (data,err) {
+    User.find({}).then(function (data,err) {
         console.log(data);
     });
     */
     res.send("salam");
 }
 
-module.exports=registerUser;
+module.exports = registerUser;
