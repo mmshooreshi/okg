@@ -1,4 +1,4 @@
-const db = require('../mysqlclient')
+const db = require('../utils/db')
 
 function registerUser(req, res) {
 
