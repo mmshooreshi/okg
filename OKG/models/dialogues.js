@@ -7,7 +7,7 @@ function dialogues(connection) {
         image: sequelize.STRING,
         dialogueid: sequelize.INTEGER,
     });
-    return dialogueText;
+    return dialogues;
 }
 
 module.exports = dialogues;
