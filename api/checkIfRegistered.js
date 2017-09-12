@@ -12,10 +12,17 @@ function checkIfRegistered(req, res) {
   }).then(users => {
     if (users.length === 0) {
       if (!validator.isMobilePhone('+98' + req.params.phoneNumber, 'fa-IR')) {
-        res.json({status: 'ERROR', error: 'MOBILE PHONE IS NOT VALID'});
+        res.json({status: 'ERROR1', error: 'Phone number is not valid.'});
         return;
       }
-      //TODO SMS SENDING
+      var sms = require('../utils/sms');
+      var enums = require('../enums');
+      var x = sms.send({
+        receptors: ['+989035405243'],
+        messages: ['Hello World!'],
+        messageType: enums.SMS_TYPE.VERIFY_CODE
+      });
+      console.log(x);
       var code = generateVerificationCode();
       var verificationCode = require('../models/verificationCode')(db);
       verificationCode.create({
@@ -24,13 +31,14 @@ function checkIfRegistered(req, res) {
       }).then(() => {
         res.json({status: 'OK', result: false});
       }).catch(e => {
-        res.json({status: 'ERROR', error: e});
+        res.json({status: 'ERROR2', error: e});
       });
     } else {
       res.json({status: 'OK', result: true});
     }
   }).catch(e => {
-    res.json({status: 'ERROR', error: e});
+    console.log(e);
+    res.json({status: 'ERROR3', error: e});
   });
 }
 

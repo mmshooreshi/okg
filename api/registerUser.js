@@ -2,8 +2,8 @@ function registerUser(req, res) {
   var db = require('../utils/db');
   var validator = require('validator');
 
-  if (!validator.isMobilePhone('+98' + req.params.phoneNumber)) {
-    res.json({status: 'ERROR', error: 'MOBILE PHONE IS NOT VALID'});
+  if (!validator.isMobilePhone('+98' + req.params.phoneNumber, 'fa-IR')) {
+    res.json({status: 'ERROR', error: 'Phone number if not valid.'});
     return;
   }
 
