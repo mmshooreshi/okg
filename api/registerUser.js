@@ -1,7 +1,11 @@
-//TODO CHECK IF MOBILE IS VALID
-
 function registerUser(req, res) {
   var db = require('../utils/db');
+  var validator = require('validator');
+
+  if (!validator.isMobilePhone('+98' + req.params.phoneNumber)) {
+    res.json({status: 'ERROR', error: 'MOBILE PHONE IS NOT VALID'});
+    return;
+  }
 
   var user = require('../models/user')(db);
   user.create({

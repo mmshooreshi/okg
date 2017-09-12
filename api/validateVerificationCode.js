@@ -15,7 +15,6 @@ function validateVerificationCode(req, res) {
       res.json({status: 'OK', result: false});
     }
   }).catch(e => {
-    console.log('SALAM' + e);
     res.json({status: 'ERROR', error: e});
   });
 }
