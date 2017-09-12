@@ -2,7 +2,7 @@ var sequelize = require('sequelize');
 
 function verificationCode(connection) {
     return connection.define('verificationCode', {
-        verificationCode: {
+        code: {
           type: sequelize.INTEGER,
           allowNull: false
         },
