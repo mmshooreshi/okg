@@ -1,3 +1,5 @@
+//TODO CHECK IF MOBILE IS VALID
+
 function registerUser(req, res) {
   var db = require('../utils/db');
 
