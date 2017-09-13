@@ -6,6 +6,7 @@ function createTables(req, res) {
   require('../models/dialogueText')(db);
   require('../models/dialogue')(db);
   require('../models/verificationCode')(db);
+  require('../models/admin')(db);
 
   db.sync().then(() => {
     res.json({status: 'OK'});

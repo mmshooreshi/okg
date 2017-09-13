@@ -5,20 +5,40 @@ function auth(req, res) {
   }
 
   var db = require('../utils/db');
+  if(req.body.roll==='user')
+  {
+      var user = require('../models/user')(db);
+      user.findOne({
+          where: {phoneNumber: req.body.phoneNumber}
+      }).then(user => {
+          if (!user || user === undefined) {
+              res.json({status: 'OK', result: ''});
+          } else {
+              var token = generateToken({phoneNumber: user.phoneNumber, roll: 'user'});
+              res.json({status: 'OK', result: token});
+          }
+      }).catch(e => {
+          res.json({status: 'ERROR', error: e});
+      });
 
-  var user = require('../models/user')(db);
-  user.findOne({
-    where: {phoneNumber: req.body.phoneNumber}
-  }).then(user => {
-    if (!user || user === undefined) {
-      res.json({status: 'OK', result: ''});
-    } else {
-      var token = generateToken({phoneNumber: user.phoneNumber, roll: 'user'});
-      res.json({status: 'OK', result: token});
-    }
-  }).catch(e => {
-    res.json({status: 'ERROR', error: e});
-  });
+  }
+  else if (req.body.roll==='admin')
+  {
+      var admin = require('../models/admin')(db);
+      admin.findOne({
+          where: {phoneNumber: req.body.phoneNumber}
+      }).then(user => {
+          if (!user || user === undefined) {
+              res.json({status: 'OK', result: ''});
+          } else {
+              var token = generateToken({phoneNumber: user.phoneNumber, roll: 'admin'});
+              res.json({status: 'OK', result: token});
+          }
+      }).catch(e => {
+          res.json({status: 'ERROR', error: e});
+      });
+
+  }
 }
 
 function generateToken(data) {
