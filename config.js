@@ -7,7 +7,7 @@ const config = {
   },
   secret: 'sickret',
   sms: {
-    url: 'https://api.kavenegar.com/v1/4D68674B546D55775A4468734D5A3467446E6F326B673D3D',
+    url: 'https://api.kavenegar.com/v1/4D68674B546D55775A4468734D5A3467446E6F326B673D3D/sms/send.json',
     user: 'karanso',
     pass: 'karansew',
     num: '10005411'
