@@ -12,11 +12,17 @@ function checkIfRegistered(req, res) {
   }).then(users => {
     if (users.length === 0) {
       if (!validator.isMobilePhone('+98' + req.params.phoneNumber, 'fa-IR')) {
-        res.json({status: 'ERROR1', error: 'Phone number is not valid.'});
+        res.json({status: 'ERROR', error: 'Phone number is not valid.'});
         return;
       }
-      //TODO SMS
       var code = generateVerificationCode();
+      var sms = require('../utils/sms');
+      var format = require('string-format');
+      /*sms.send({
+        receptor: req.params.phoneNumber,
+        message: format('کد تایید شما: {0}', code)
+      });*/
+      console.log(code);
       var verificationCode = require('../models/verificationCode')(db);
       verificationCode.create({
         code: code,
@@ -24,14 +30,14 @@ function checkIfRegistered(req, res) {
       }).then(() => {
         res.json({status: 'OK', result: false});
       }).catch(e => {
-        res.json({status: 'ERROR2', error: e});
+        res.json({status: 'ERROR', error: e});
       });
     } else {
       res.json({status: 'OK', result: true});
     }
   }).catch(e => {
     console.log(e);
-    res.json({status: 'ERROR3', error: e});
+    res.json({status: 'ERROR', error: e});
   });
 }
 
