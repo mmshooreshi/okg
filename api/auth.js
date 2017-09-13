@@ -1,5 +1,5 @@
-function authenticate(req, res) {
-  if (typeof req.body.phoneNumber === 'undefined') {
+function auth(req, res) {
+  if (req.body.phoneNumber === undefined) {
     res.json({status: 'ERROR', error: 'No phoneNumber in request body.'});
     return;
   }
@@ -10,7 +10,7 @@ function authenticate(req, res) {
   user.findOne({
     where: {phoneNumber: req.body.phoneNumber}
   }).then(user => {
-    if (user === null) {
+    if (!user || user === undefined) {
       res.json({status: 'OK', result: ''});
     } else {
       var token = generateToken({phoneNumber: user.phoneNumber, roll: 'user'});
@@ -29,4 +29,4 @@ function generateToken(data) {
   }, config.secret);
 }
 
-module.exports = authenticate;
+module.exports = auth;

@@ -60,9 +60,8 @@ const send = async ({receptors, messages, messageType}) => {
       smsService.post(url, qs.stringify(params))
     result.success = true
     result.entries = response.data.entries
-    logger.console.info(`sms sent to ${receptors}`)
+    console.log(':)))');
   } catch (err) {
-    logger.console.error('Error in Send SMS', {err})
     result.success = false
     result.error = err.response || {status: 0, statusText: 'Unknown'}
   }

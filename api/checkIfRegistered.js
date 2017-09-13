@@ -15,14 +15,7 @@ function checkIfRegistered(req, res) {
         res.json({status: 'ERROR1', error: 'Phone number is not valid.'});
         return;
       }
-      var sms = require('../utils/sms');
-      var enums = require('../enums');
-      var x = sms.send({
-        receptors: ['+989035405243'],
-        messages: ['Hello World!'],
-        messageType: enums.SMS_TYPE.VERIFY_CODE
-      });
-      console.log(x);
+      //TODO SMS
       var code = generateVerificationCode();
       var verificationCode = require('../models/verificationCode')(db);
       verificationCode.create({
