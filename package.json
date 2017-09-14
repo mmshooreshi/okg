@@ -1,14 +1,8 @@
 {
   "name": "okg",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "axios": "^0.16.2",
     "babel-cli": "^6.26.0",
