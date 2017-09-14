@@ -1,16 +1,18 @@
 var express = require('express');
 var server = express();
 
+server.use(express.static('public'));
+
 var bodyParser = require('body-parser');
 server.use(bodyParser.urlencoded({extended: false}));
 server.use(bodyParser.json());
+
 server.use(require('./middlewares/jwtParser'));
 
 var isUser = require('./middlewares/isUser');
 var isAdmin = require('./middlewares/isAdmin');
 
 server.get('/createTables', require('./api/createTables'));
-
 server.get('/addGenre/:title/:image', require('./api/addGenre'));
 server.get('/getGenres', require('./api/getGenres'));
 server.get('/getDialoguesByGenreId/:genreId', require('./api/getDialoguesByGenreId'));
